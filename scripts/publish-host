@@ -1,0 +1,6 @@
+#!/bin/bash
+samplefile=/usr/share/wine-docker-builder/GETUIDGID
+uid=`stat -c '%u' $samplefile`
+gid=`stat -c '%g' $samplefile`
+perm=`stat -c '%a' $samplefile`
+install -o $uid -g $gid -m $perm $1 /mnt/outputs

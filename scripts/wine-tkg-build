@@ -1,0 +1,11 @@
+#!/bin/bash
+git clone https://github.com/Frogging-Family/wine-tkg-git
+cd wine-tkg-git/wine-tkg-git
+mkdir -p ~/.config/frogminer
+cp wine-tkg-profiles/chaotic-staging.cfg ~/.config/frogminer/wine-tkg.cfg
+./non-makepkg-build.sh
+rm ~/.config/frogminer/wine-tkg.cfg
+cd non-makepkg-builds
+winename=`ls -t1 |  head -n 1`
+tar -cavf $winename.tar.xz $winename
+publish-host $winename.tar.xz
