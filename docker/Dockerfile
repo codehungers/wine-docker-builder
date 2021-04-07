@@ -9,6 +9,7 @@ RUN apt-get install -y git wget
 ENV HOME /root
 # sed -i s/apt\ install/apt\ install\ -y/g "wine-tkg-scripts/deps"
 RUN mkdir /workdir
+# RUN mkdir /usr/bin/wine-docker-builder
 WORKDIR /workdir
 COPY install.sh install.sh
 RUN chmod +x install.sh
