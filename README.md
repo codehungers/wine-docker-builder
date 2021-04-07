@@ -26,7 +26,7 @@ You can run those automatic scripts:
 
 #### Outputs
 All compilation final outputs will be copied into "outputs" folder so you can access them in host machine.
-`publish-host` - when working manually you can use the publish-host <filename> to automatic copy the compilation final outputs.
+- `publish-host` - when working manually you can use the publish-host <filename> to automatic copy the compilation final outputs.
 
 #### Manually Build wine-tkg example
 ```
