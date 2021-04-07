@@ -1,5 +1,5 @@
 ## Wine Docker Builder
-welcome to wine docker builder. This project let you easily build wine inside docker container
+Welcome to wine docker builder. This project let you easily build wine inside docker container.
 ### Advantages:
 
 * Build wine in any host machine without the need to install all dependencies manually.
@@ -9,29 +9,33 @@ welcome to wine docker builder. This project let you easily build wine inside do
 
 ## Instructions
 ### Build the docker container
-need to build the docker container where the build process would happen this only happen once and can be updated when needed.
+Need to build the docker container where the build process would happen this only happen once and can be updated when needed.
 ```
-sudo docker build -t wine-docker-builder .
+./build-container.sh
 ```
 ### Run the container 
 This would launch the container with the environment ready to build wine.
 ```
-sudo docker run -v workdir:/workdir -v $(pwd)/outputs:/mnt/outputs -v $(pwd)/scripts:/usr/local/bin:ro^Cv $(pwd)/resources:/usr/share/wine-docker-builder:ro -it wine-builder bash
+./run-container.sh
 ```
 ### Working inside the container
-here you can start pulling source and build wine.
-#### Build wine-tkg example
+You are now inside the docker container here you can start working on building wine by automatic scripts or do it yourself manually.
+#### Automatic Scripts
+You can run those automatic scripts:
+`wine-tkg-build` - build latest wine-tkg with chaotic-staging configuration and package it into tar.xz file
+
+#### Outputs
+All compilation final outputs will be copied into "outputs" folder so you can access them in host machine.
+`publish-host` - when working manually you can use the publish-host <filename> to automatic copy the compilation final outputs.
+
+#### Manually Build wine-tkg example
 ```
 git clone https://github.com/Frogging-Family/wine-tkg-git
 cd wine-tkg-git/wine-tkg-git
 ./non-makepkg-build.sh
 cd non-makepkg-builds
 tar -cavf wine-tkg-6.5.tar.xz wine-tkg-6.5
-
-```
-
-### Publish to host
-after you finish the build process and want publish the result to host machine you can run the following:
-```
 publish-host wine-tkg-6.5.tar.xz
 ```
+#### Finish Working inside the container and going back to host
+Just run `exit` then you got back to host machine, you can look inside the outputs folder to see the compilation results `ls -la ./outputs`.
