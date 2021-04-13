@@ -5,5 +5,8 @@ RUN chmod +x build-mingw-w64.sh
 RUN ./build-mingw-w64.sh /root/.local && rm -rf *
 COPY build-glslang.sh build-glslang.sh
 RUN chmod +x build-glslang.sh
-RUN ./build-glslang.sh /root/.local && rm -rf *
+RUN apt-get -y install cmake &&\
+     ./build-glslang.sh /root/.local &&\
+     apt-get purge --auto-remove cmake &&\
+     rm -rf *
 
