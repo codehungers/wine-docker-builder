@@ -22,7 +22,8 @@ This would launch the container with the environment ready to build wine.
 You are now inside the docker container here you can start working on building wine by automatic scripts or do it yourself manually.
 #### Automatic Scripts
 You can run those automatic scripts:
-- `wine-tkg-build` - build latest wine-tkg with chaotic-staging configuration and package it into tar.xz file
+- `wine-tkg-build` - build latest wine-tkg with chaotic-staging config
+- `proton-tkg-build` - build latest proton-tkg with default config (resources/configs/proton-tkg-std.cfg)
 
 #### Outputs
 All compilation final outputs will be copied into "outputs" folder so you can access them in host machine.
