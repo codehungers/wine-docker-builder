@@ -7,4 +7,3 @@ sed -i s/apt\ install/apt\ install\ -y/g $depfile
 source $depfile
 DEBIAN_FRONTEND=noninteractive _debuntu_64
 DEBIAN_FRONTEND=noninteractive _debuntu_32
-rm -rf *
