@@ -1,0 +1,6 @@
+FROM wine-docker-builder-base:latest
+RUN apt-get install -y libmpc-dev
+COPY build-mingw-w64.sh build-mingw-w64.sh
+RUN chmod +x build-mingw-w64.sh
+RUN ./build-mingw-w64.sh /root/.local
+RUN rm -rf *
