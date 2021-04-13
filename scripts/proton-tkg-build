@@ -5,9 +5,7 @@ mkdir -p ~/.config/frogminer
 cp /usr/share/wine-docker-builder/configs/proton-tkg-std.cfg ~/.config/frogminer/proton-tkg.cfg
 sed -i 's/read -rp "Your S.*/_no_steampath=y/' proton-tkg.sh
 ./proton-tkg.sh
-exit
 rm ~/.config/frogminer/proton-tkg.cfg
-cd non-makepkg-builds
-winename=`ls -t1 |  head -n 1`
-tar -cavf $winename.tar.xz $winename
-publish-host $winename.tar.xz
+protonname=`ls -t1 |  head -n 1`
+tar -cvf $protonname.tar $protonname
+publish-host $protonname.tar
