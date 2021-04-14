@@ -1,6 +1,7 @@
 #!/bin/bash
 git clone https://github.com/Frogging-Family/wine-tkg-git
 cd wine-tkg-git/wine-tkg-git
+sed '\+git clone https://github.com/Frogging-Family/community-patches.git+ s+$+ && cp /usr/share/wine-docker-builder/patches/* wine-tkg-git/+' wine-tkg-scripts/prepare.sh
 mkdir -p ~/.config/frogminer
 cp wine-tkg-profiles/chaotic-staging.cfg ~/.config/frogminer/wine-tkg.cfg
 ./non-makepkg-build.sh
