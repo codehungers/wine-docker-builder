@@ -19,7 +19,7 @@ This would launch the container with the environment ready to build wine.
 ./run-container.sh
 ```
 ### Working inside the container
-You are now inside the docker container here you can start working on building wine by automatic scripts or do it yourself manually.
+You are now inside the docker container here you can start working on building wine by automatic commands or do it yourself manually.
 #### Container commands
 You can run those automatic commands directly in shell `$ command-name` they are already in PATH:
 - `wine-tkg-build` - build latest wine-tkg with chaotic-staging config.
