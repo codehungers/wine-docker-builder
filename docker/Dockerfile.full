@@ -2,11 +2,11 @@ FROM wine-docker-builder-base:latest
 RUN apt-get install -y libmpc-dev
 COPY build-mingw-w64.sh build-mingw-w64.sh
 RUN chmod +x build-mingw-w64.sh
-RUN ./build-mingw-w64.sh /root/.local && rm -rf *
+RUN ./build-mingw-w64.sh /usr/local && rm -rf *
 COPY build-glslang.sh build-glslang.sh
 RUN chmod +x build-glslang.sh
 RUN apt-get -y install cmake &&\
-     ./build-glslang.sh /root/.local &&\
-     apt-get purge --auto-remove cmake &&\
+     ./build-glslang.sh /usr/local &&\
+     apt-get -y purge --auto-remove cmake &&\
      rm -rf *
 
