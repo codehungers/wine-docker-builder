@@ -1,5 +1,6 @@
 #!/bin/bash
-git clone https://github.com/Frogging-Family/wine-tkg-git
+set -e
+fetch-wine-tkg
 cd wine-tkg-git/proton-tkg
 mkdir -p ~/.config/frogminer
 cp /usr/share/wine-docker-builder/configs/proton-tkg-std.cfg ~/.config/frogminer/proton-tkg.cfg
