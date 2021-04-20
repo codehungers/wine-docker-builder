@@ -1,10 +1,15 @@
 #!/bin/bash
 set -e
+config_filename=${1:-"chaotic-staging.cfg"}
+configs_dir="/usr/share/wine-docker-builder/configs"
 fetch-wine-tkg
 cd wine-tkg-git/wine-tkg-git
-sed '\+git clone https://github.com/Frogging-Family/community-patches.git+ s+$+ && cp /usr/share/wine-docker-builder/patches/* wine-tkg-git/+' wine-tkg-scripts/prepare.sh
+cfgfile=`find wine-tkg-profiles "$configs_dir" -maxdepth 1 -name "$config_filename" -print -quit`
+[[ -z "$cfgfile" ]] && (echo "can't find config file: $config_filename" 1>&2; exit -1)
+echo "$cfgfile"
+sed -i '\+git clone https://github.com/Frogging-Family/community-patches.git$+ s+$+ \&\& cp /usr/share/wine-docker-builder/patches/* community-patches/wine-tkg-git/+' wine-tkg-scripts/prepare.sh
 mkdir -p ~/.config/frogminer
-cp wine-tkg-profiles/chaotic-staging.cfg ~/.config/frogminer/wine-tkg.cfg
+cp "$cfgfile" ~/.config/frogminer/wine-tkg.cfg
 ./non-makepkg-build.sh
 rm ~/.config/frogminer/wine-tkg.cfg
 cd non-makepkg-builds
