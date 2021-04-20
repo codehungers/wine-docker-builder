@@ -11,7 +11,7 @@ echo "$cfgfile"
 mkdir -p ~/.config/frogminer
 cp "$cfgfile" ~/.config/frogminer/proton-tkg.cfg
 sed -i 's/read -rp "Your S.*/_no_steampath=y/' proton-tkg.sh
-sed -i '\+git clone https://github.com/Frogging-Family/community-patches.git$+ s+$+ \&\& cp /usr/share/wine-docker-builder/patches/* community-patches/wine-tkg-git/+' ../wine-tkg-git/wine-tkg-scripts/prepare.sh
+sed -i '\+_community_patches_repo_path="$_where/../../community-patches/wine-tkg-git"$+ s+$+ \; cp /usr/share/wine-docker-builder/patches/* $_community_patches_repo_path+' ../wine-tkg-git/wine-tkg-scripts/prepare.sh
 [[ -z "$version" ]] || echo -e "\n_staging_version=$version" >> ~/.config/frogminer/proton-tkg.cfg
 ./proton-tkg.sh
 rm ~/.config/frogminer/proton-tkg.cfg
