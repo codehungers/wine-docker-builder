@@ -3,7 +3,11 @@ set -e
 basedir="$PWD"
 wine_tkg_bare="$basedir/bare/wine-tkg-git-bare"
 wine_tkg_src="$basedir/wine-tkg-git"
-git clone https://github.com/Frogging-Family/wine-tkg-git "$wine_tkg_bare" || true
+git clone --mirror https://github.com/Frogging-Family/wine-tkg-git "$wine_tkg_bare" || true
 cd "$wine_tkg_bare"
 git fetch --all -p
-rm -rf "$wine_tkg_src" && git clone "$wine_tkg_bare" "$wine_tkg_src"
+git clone "$wine_tkg_bare" "$wine_tkg_src" || true
+cd "$wine_tkg_src"
+git checkout .
+git clean -fd
+git pull
