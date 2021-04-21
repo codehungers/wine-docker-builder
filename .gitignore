@@ -1,3 +1,6 @@
 outputs/*
 .vscode/*
 .history/
+resources/patches/*.mypatch
+resources/configs/*.cfg
+!resources/configs/proton-tkg-std.cfg
