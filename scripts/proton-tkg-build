@@ -16,5 +16,5 @@ sed -i '\+_community_patches_repo_path="$_where/../../community-patches/wine-tkg
 ./proton-tkg.sh
 rm ~/.config/frogminer/proton-tkg.cfg
 protonname=`ls -t1 |  head -n 1`
-tar -cvf $protonname.tar $protonname
-publish-host $protonname.tar
+tar -cavf $protonname.tar.xz $protonname
+publish-host $protonname.tar.xz
