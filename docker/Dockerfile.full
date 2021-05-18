@@ -9,4 +9,4 @@ RUN apt-get -y install cmake &&\
      ./build-glslang.sh /usr/local &&\
      apt-get -y purge --auto-remove cmake &&\
      rm -rf *
-
+RUN apt-get -y install sudo
