@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir workdir &> /dev/null
+mkdir outputs &> /dev/null
 docker run  -e USERID=$(id -u) \
             -e GROUPID=$(id -g) \
             -v workdir:/workdir \
