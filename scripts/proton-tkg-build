@@ -9,9 +9,13 @@ cfgfile=`find "$configs_dir" -maxdepth 1 -name "$config_filename" -print -quit`
 [[ -z "$cfgfile" ]] && (echo "can't find config file: $config_filename" 1>&2; exit -1)
 echo "$cfgfile"
 mkdir -p ~/.config/frogminer
-cp "$cfgfile" ~/.config/frogminer/proton-tkg.cfg
+cp "$PWD/proton-tkg.cfg" ~/.config/frogminer/proton-tkg.cfg
+cat "$cfgfile" >> ~/.config/frogminer/proton-tkg.cfg
 sed -i 's/read -rp "Your S.*/_no_steampath=y/' proton-tkg.sh
+sed -i 's/read -rp "  Revert it anyway to fix B.*/_hotfixansw_414b=y/' ../wine-tkg-git/wine-tkg-patches/hotfixes/hotfixer
+sed -i $'s/read -rp \'  > .*/_hotfixansw_737f=2/' ../wine-tkg-git/wine-tkg-patches/hotfixes/hotfixer
 sed -i '\+_community_patches_repo_path="$_where/../../community-patches/wine-tkg-git"$+ s+$+ \; cp /usr/share/wine-docker-builder/patches/* $_community_patches_repo_path+' ../wine-tkg-git/wine-tkg-scripts/prepare.sh
+sed -i 's/wine_is_running$/echo "sleeping for 25 second wine finish generating env"; sleep 25/' proton-tkg.sh
 [[ -z "$version" ]] || echo -e "\n_staging_version=$version" >> ~/.config/frogminer/proton-tkg.cfg
 ./proton-tkg.sh
 rm ~/.config/frogminer/proton-tkg.cfg
