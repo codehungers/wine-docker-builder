@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+[ -d 'community-patches' ] && rm -rf 'community-patches'
 basedir="$PWD"
 wine_tkg_bare="$basedir/bare/wine-tkg-git-bare"
 wine_tkg_src="$basedir/wine-tkg-git"
