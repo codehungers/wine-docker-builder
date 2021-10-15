@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+config_filename=${1:-"chaotic-staging.cfg"}
+if [ -z "$1" ]; then
+    echo "No argument supplied"
+    exit -1
+fi
+deb_package_name="wine-tkg-staging-opt"
+deb_version="6.8.r5.g0df3e892"
+
+wine_tar="$1"
+basedir="$PWD"
+debdir="$basedir/deb"
+rm -rf "$debdir"
+mkdir "$debdir"
+mkdir "$debdir/opt"
+tar xavf $wine_tar -C "$debdir/opt"
+mkdir "$debdir/DEBIAN"
+deb_package_name="$deb_package_name" deb_version="$deb_version" envsubst < "/usr/share/wine-docker-builder/deb/control" > "$debdir/DEBIAN/control"
+chmod 775 "$debdir/DEBIAN/control"
+#sdfds
+mkdir -p "$debdir/usr/local/bin"
+cat > "$debdir/usr/local/bin/wine" << EOF
+#!/bin/bash
+/`realpath --relative-to=./deb deb/opt/wine*/bin/wine` "\$@"
+EOF
+chmod 755 "$debdir/usr/local/bin/wine"
+#sdfsdf
+dpkg-deb --build deb "$deb_package_name.deb"
+publish-host "$deb_package_name.deb"
