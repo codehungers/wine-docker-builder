@@ -5,10 +5,12 @@ if [ -z "$1" ]; then
     echo "No argument supplied"
     exit -1
 fi
-deb_package_name="wine-tkg-staging-opt"
-deb_version="6.8.r5.g0df3e892"
-
 wine_tar="$1"
+wine_tar_filename=`basename $wine_tar`
+deb_version="${wine_tar##*-}"
+deb_version="${deb_version%%.tar.*}"
+deb_package_name="${wine_tar_filename%-*}-opt"
+echo "$deb_version $deb_package_name"
 basedir="$PWD"
 debdir="$basedir/deb"
 rm -rf "$debdir"
@@ -26,5 +28,6 @@ cat > "$debdir/usr/local/bin/wine" << EOF
 EOF
 chmod 755 "$debdir/usr/local/bin/wine"
 #sdfsdf
-dpkg-deb --build deb "$deb_package_name.deb"
-publish-host "$deb_package_name.deb"
+dpkg-deb --build deb "$deb_package_name-$deb_version.deb"
+publish-host "$deb_package_name-$deb_version.deb"
+rm "$deb_package_name-$deb_version.deb"
