@@ -10,6 +10,7 @@ wine_tar_filename=`basename $wine_tar`
 deb_version="${wine_tar##*-}"
 deb_version="${deb_version%%.tar.*}"
 deb_package_name="${wine_tar_filename%-*}-opt"
+command_name="${wine_tar_filename%-fsync-git*}"
 echo "$deb_version $deb_package_name"
 basedir="$PWD"
 debdir="$basedir/deb"
@@ -21,12 +22,14 @@ mkdir "$debdir/DEBIAN"
 deb_package_name="$deb_package_name" deb_version="$deb_version" envsubst < "/usr/share/wine-docker-builder/deb/control" > "$debdir/DEBIAN/control"
 chmod 775 "$debdir/DEBIAN/control"
 #sdfds
-mkdir -p "$debdir/usr/local/bin"
-cat > "$debdir/usr/local/bin/wine" << EOF
+mkdir -p "$debdir/usr/bin"
+full_command_path="$debdir/usr/bin/$command_name"
+cat > "$full_command_path" << EOF
 #!/bin/bash
+export WINEPREFIX="\${WINEPREFIX:-\$HOME/.$command_name}"
 /`realpath --relative-to=./deb deb/opt/wine*/bin/wine` "\$@"
 EOF
-chmod 755 "$debdir/usr/local/bin/wine"
+chmod 755 "$full_command_path"
 #sdfsdf
 dpkg-deb --build deb "$deb_package_name-$deb_version.deb"
 publish-host "$deb_package_name-$deb_version.deb"
