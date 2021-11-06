@@ -46,7 +46,7 @@ MINGW_W64_SRCDIR=mingw-w64-git
 
 ISL_VER=0.22.1
 ISL_SRCTARBALL=isl-$ISL_VER.tar.bz2
-ISL_URL="http://isl.gforge.inria.fr/isl-$ISL_VER.tar.bz2"
+ISL_URL="https://sources.easybuild.io/i/ISL/isl-$ISL_VER.tar.bz2"
 ISL_SRCDIR=isl-$ISL_VER
 
 function setup_src {
