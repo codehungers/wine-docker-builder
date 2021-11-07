@@ -17,10 +17,7 @@ if [ ! -d "outputs" ]; then
     install -d -o "$USERID" -g "$GROUPID" -m 755 ./outputs
 fi
 
-
 tag=${1:-"latest"}
-mkdir workdir &> /dev/null
-mkdir outputs &> /dev/null
 docker run  -e USERID=$USERID \
             -e GROUPID=$GROUPID \
             -v $PWD/outputs:/mnt/outputs \
