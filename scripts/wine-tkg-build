@@ -15,6 +15,7 @@ sed -i '\+git clone https://github.com/Frogging-Family/community-patches.git "${
 mkdir -p ~/.config/frogminer
 cp "$cfgfile" ~/.config/frogminer/wine-tkg.cfg
 [[ -z "$version" ]] || echo "_staging_version=$version" >> ~/.config/frogminer/wine-tkg.cfg
+[[ -f "src/rdr2.patch" ]] && rm "src/rdr2.patch"
 ./non-makepkg-build.sh
 rm ~/.config/frogminer/wine-tkg.cfg
 cd non-makepkg-builds
